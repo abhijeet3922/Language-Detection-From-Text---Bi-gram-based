@@ -26,18 +26,14 @@ def test_language(path,language,total):
             line = line.lower()
             line = re.sub(r"\d+", "", line)
             line = line.translate(translate_table)
-            #print line
-            #words = nltk.word_tokenize(line)
-            
+          
             finder = BigramCollocationFinder.from_words(line)
                         
-            freq_sum = np.zeros(6)
-                        
+            freq_sum = np.zeros(6)                      
             for k,v in finder.ngram_fd.items():
                 #print k,v 
                 isthere = 0
-                for i,lang in enumerate(lang_name):
-                    
+                for i,lang in enumerate(lang_name):                    
                     for key,f in model[i]:
                         if k == key:                            
                             freq_sum[i] = freq_sum[i] + (f*10000)/total[i]
@@ -48,7 +44,7 @@ def test_language(path,language,total):
                                 
             max_val = freq_sum.max()
             index= freq_sum.argmax()
-            #print l,lang_name[index],freq_sum
+            
             if max_val != 0:                
                 if lang_name[index] == lang_name[0]:
                     ep = ep + 1
@@ -63,28 +59,23 @@ def test_language(path,language,total):
                 elif lang_name[index] == lang_name[5]:
                     sp = sp + 1
             else:
-                cd = cd + 1
-            #print "tp = ",tp,"fp = ",fp,"cd = ",cd, freq_sum
+                cd = cd + 1            
     print ep," ",gp," ",fp," ",ip," ",dp," ",sp                
             
-    
-    
 if __name__ == "__main__":
-    root = "C:\\Users\\Charlie\\Desktop\\language-id-text\\lid-scratch\\data\\test\\"
+    root = "test\\"
     lang_name = ["english","german","french","italian","dutch","spanish"]
     
     no_of_bigms = []
     for i,lang in enumerate(lang_name):
-        root_path = "C:\\Users\\Charlie\\Desktop\\language-id-text\\lid-scratch\\language_models\\gram-based\\"
+        root_path = "language_models\\gram-based\\"
         model = np.load(root_path+lang+".npy")
         total = 0
         for key,v in model:            
             total = total + v
         no_of_bigms.append(total) 
         print total
-    
-    
-    
+ 
     train_lang_path = ["eng_news_2015_10K\\eng_news_2015_10K-sentences.txt","deu_news_2015_10K\\deu_news_2015_10K-sentences.txt","fra_news_2010_10K-text\\fra_news_2010_10K-sentences.txt","ita_news_2010_10K-text\\ita_news_2010_10K-sentences.txt","nld_wikipedia_2016_10K\\nld_wikipedia_2016_10K-sentences.txt","spa_news_2011_10K\\spa_news_2011_10K-sentences.txt"]
     for i,p in enumerate(train_lang_path):
         print "Testing of ",lang_name[i]
