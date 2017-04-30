@@ -14,18 +14,14 @@ def train_language(path,lang_name):
         for i,line in enumerate(filep):            
                      
             line = " ".join(line.split()[1:])
-            line = line.lower()
-            
+            line = line.lower()           
             line = re.sub(r"\d+", "", line)
             
-            #words = nltk.word_tokenize(line)
             if len(line) != 0:
                 line = line.translate(translate_table)
                 words_all += line
                 words_all.append(" ")
-                
-            #words_all += words
-    #print words_all   
+
     all_str = ''.join(words_all)
     all_str = re.sub(' +',' ',all_str)
     seq_all = [i for i in all_str]
@@ -34,21 +30,12 @@ def train_language(path,lang_name):
     finder.apply_freq_filter(5)
     bigram_model = finder.ngram_fd.viewitems()
     bigram_model = sorted(finder.ngram_fd.viewitems(), key=lambda item: item[1],reverse=True)
-#    bigram_measures = nltk.collocations.BigramAssocMeasures()
-#    bigram_model  = finder.nbest(bigram_measures.pmi,30000)  
     print len(bigram_model)
     
     np.save(lang_name+".npy",bigram_model)
-#    for k,v in finder.ngram_fd.items():
-#      print(k,v)
-
-    
-    
-    
-        
-
+     
 if __name__ == "__main__":
-    root = "C:\\Users\\Charlie\\Desktop\\language-id-text\\lid-scratch\\data\\train\\"
+    root = "train\\"
     lang_name = ["french","english","german","italian","dutch","spanish"]
     train_lang_path = ["fra_news_2010_30K-text\\fra_news_2010_30K-sentences.txt","eng_news_2015_30K\\eng_news_2015_30K-sentences.txt","deu_news_2015_30K\\deu_news_2015_30K-sentences.txt","ita_news_2010_30K-text\\ita_news_2010_30K-sentences.txt","nld_wikipedia_2016_30K\\nld_wikipedia_2016_30K-sentences.txt","spa_news_2011_30K\\spa_news_2011_30K-sentences.txt"]
     for i,p in enumerate(train_lang_path):
