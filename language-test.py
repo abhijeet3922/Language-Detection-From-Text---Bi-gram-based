@@ -15,7 +15,7 @@ def test_language(path,language,total):
     sp = 0
     cd = 0
     lang_name = ["english","german","french","italian","dutch","spanish"]
-    root = "C:\\Users\\Charlie\\Desktop\\language-id-text\\lid-scratch\\language_models\\gram-based\\"
+    root = "language_models\\gram-based\\"
     model = [np.load(root+lang+".npy") for lang in lang_name]
     
     with codecs.open(path,"r","utf-8") as filep:
@@ -31,7 +31,6 @@ def test_language(path,language,total):
                         
             freq_sum = np.zeros(6)                      
             for k,v in finder.ngram_fd.items():
-                #print k,v 
                 isthere = 0
                 for i,lang in enumerate(lang_name):                    
                     for key,f in model[i]:
