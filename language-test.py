@@ -15,8 +15,7 @@ def test_language(path,language,total):
     sp = 0
     cd = 0
     lang_name = ["english","german","french","italian","dutch","spanish"]
-    root = "language_models\\gram-based\\"
-    model = [np.load(root+lang+".npy") for lang in lang_name]
+    model = [np.load(lang+".npy") for lang in lang_name]
     
     with codecs.open(path,"r","utf-8") as filep:
         translate_table = dict((ord(char), None) for char in string.punctuation)
@@ -67,8 +66,7 @@ if __name__ == "__main__":
     
     no_of_bigms = []
     for i,lang in enumerate(lang_name):
-        root_path = "language_models\\gram-based\\"
-        model = np.load(root_path+lang+".npy")
+        model = np.load(lang+".npy")
         total = 0
         for key,v in model:            
             total = total + v
