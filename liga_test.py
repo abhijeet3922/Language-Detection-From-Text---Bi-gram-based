@@ -11,18 +11,14 @@ lang_name = ["english","german","french","italian","dutch","spanish"]
 
 no_of_bigms = []
 for i,lang in enumerate(lang_name):
-    root_path = "language_models\\gram-based\\"
-    model = np.load(root_path+lang+".npy")
+    model = np.load(lang+".npy")
     total = 0
     for key,v in model:            
         total = total + v
     no_of_bigms.append(total) 
     print total
 
-
-root = "language_models\\gram-based\\"
-model = [np.load(root+lang+".npy") for lang in lang_name]
-
+model = [np.load(lang+".npy") for lang in lang_name]
 
 files = [os.path.join(dirname, f) for f in os.listdir(dirname)]
 
