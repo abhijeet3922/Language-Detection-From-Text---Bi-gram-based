@@ -19,6 +19,6 @@ You only need to install these (tested):
 2. Install NLTK data using interactive installer (http://www.nltk.org/data.html)
 
 
-Best thing would be to follow my blog-post for implementation. The description about the steps to build a text language detector from scratch can be read from my blog:
+Best thing would be to follow my blog-post for implementation and experimental results. The description about the steps to build a text language detector from scratch can be read from my blog:
 
 https://appliedmachinelearning.wordpress.com/2017/04/30/language-identification-from-texts-using-bi-gram-model-pythonnltk/
